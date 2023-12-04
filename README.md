@@ -83,6 +83,7 @@
         }
 
         /* Add more CSS styles for visual elements and animations */
+
     </style>
 </head>
 <body>
@@ -130,6 +131,36 @@
                 </div>
             </div>
         </div>
+        
+        <!-- D3.js Bar Chart Visualization -->
+        <div class="cv-section">
+            <h2>Skills Visualization</h2>
+            <div id="visualization-container"></div>
+        </div>
     </div>
+
+    <!-- D3.js Code for Bar Chart -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // Sample data for the bar chart
+        var data = [10, 20, 30, 40, 50];
+
+        // Set up the SVG canvas
+        var svg = d3.select("#visualization-container")
+            .append("svg")
+            .attr("width", 400)
+            .attr("height", 200);
+
+        // Create bars
+        svg.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", function(d, i) { return i * 50; })
+            .attr("y", function(d) { return 200 - d; })
+            .attr("width", 40)
+            .attr("height", function(d) { return d; })
+            .attr("fill", "blue");
+    </script>
 </body>
 </html>
