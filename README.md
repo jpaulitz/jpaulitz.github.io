@@ -62,15 +62,10 @@
 
         /* Visual representation of the CV */
         .bubble-chart-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .bubble-chart {
             position: relative;
-            width: 400px;
+            width: 100%;
             height: 200px;
+            background-color: #f5f5f5;
         }
 
         .bubble {
@@ -84,32 +79,17 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 5px;
-            cursor: pointer;
-        }
-
-        .time-axis {
-            width: 100%;
-            height: 20px;
-            background-color: #ccc;
-            position: relative;
-        }
-
-        .last-bubble {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #007bff;
-            color: #fff;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 5px;
             cursor: pointer;
             position: absolute;
-            right: 0;
+        }
+
+        .timeline {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #ccc;
         }
 
         /* Add more CSS styles for visual elements and animations */
@@ -164,17 +144,15 @@
         <section class="section">
             <h2>Work History Visualization</h2>
             <div class="bubble-chart-container">
-                <div class="bubble-chart">
-                    <!-- Time Axis -->
-                    <div class="time-axis"></div>
-
-                    <!-- Bubbles for Jobs -->
-                    <div class="bubble" style="left: 10%;">Job 1</div>
-                    <div class="bubble" style="left: 40%;">Job 2</div>
-                    <div class="bubble" style="left: 70%;">Job 3</div>
-
-                    <!-- Last Bubble -->
-                    <div class="last-bubble">This could be your company</div>
+                <!-- Timeline -->
+                <div class="timeline"></div>
+                <!-- Bubbles for Jobs -->
+                <div class="bubble" style="left: 10%; bottom: 50px;">Job 1</div>
+                <div class="bubble" style="left: 40%; bottom: 50px;">Job 2</div>
+                <div class="bubble" style="left: 70%; bottom: 50px;">Job 3</div>
+                <!-- Last Bubble -->
+                <div class="bubble last-bubble" style="left: 95%; bottom: 50px;">
+                    This could be your company
                 </div>
             </div>
         </section>
