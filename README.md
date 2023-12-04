@@ -67,6 +67,12 @@
             align-items: center;
         }
 
+        .bubble-chart {
+            position: relative;
+            width: 400px;
+            height: 200px;
+        }
+
         .bubble {
             width: 50px;
             height: 50px;
@@ -80,6 +86,30 @@
             align-items: center;
             margin: 5px;
             cursor: pointer;
+        }
+
+        .time-axis {
+            width: 100%;
+            height: 20px;
+            background-color: #ccc;
+            position: relative;
+        }
+
+        .last-bubble {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
         }
 
         /* Add more CSS styles for visual elements and animations */
@@ -130,68 +160,24 @@
             </div>
         </section>
 
-        <!-- D3.js Bubble Chart Visualization -->
+        <!-- Bubble Chart Section -->
         <section class="section">
             <h2>Work History Visualization</h2>
-            <div class="bubble-chart-container" id="bubble-chart-container"></div>
+            <div class="bubble-chart-container">
+                <div class="bubble-chart">
+                    <!-- Time Axis -->
+                    <div class="time-axis"></div>
+
+                    <!-- Bubbles for Jobs -->
+                    <div class="bubble" style="left: 10%;">Job 1</div>
+                    <div class="bubble" style="left: 40%;">Job 2</div>
+                    <div class="bubble" style="left: 70%;">Job 3</div>
+
+                    <!-- Last Bubble -->
+                    <div class="last-bubble">This could be your company</div>
+                </div>
+            </div>
         </section>
     </div>
-
-    <!-- D3.js Code for Bubble Chart -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script>
-        // Sample data for the bubble chart
-        var data = [
-            { jobTitle: "Job 1", company: "Company A", startDate: "2020-01-01", endDate: "2022-06-30" },
-            { jobTitle: "Job 2", company: "Company B", startDate: "2019-04-15", endDate: "2020-01-15" },
-            { jobTitle: "Job 3", company: "Company C", startDate: "2017-08-10", endDate: "2019-03-20" }
-        ];
-
-        // Create a function to calculate the duration of each job in months
-        function calculateDuration(startDate, endDate) {
-            var start = new Date(startDate);
-            var end = new Date(endDate);
-            var months = (end.getFullYear() - start.getFullYear()) * 12;
-            months -= start.getMonth();
-            months += end.getMonth();
-            return months <= 0 ? 0 : months;
-        }
-
-        // Set up the SVG canvas for the bubble chart
-        var svg = d3.select("#bubble-chart-container")
-            .append("svg")
-            .attr("width", 400)
-            .attr("height", 200);
-
-        // Create bubbles for each job
-        var bubbles = svg.selectAll("circle")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("cx", function (d, i) { return i * 100 + 50; })
-            .attr("cy", 100)
-            .attr("r", function (d) { return Math.sqrt(calculateDuration(d.startDate, d.endDate)) * 10; })
-            .style("fill", "#007bff")
-            .style("opacity", 0.7)
-            .style("cursor", "pointer");
-
-        // Add labels inside the bubbles
-        svg.selectAll(null)
-            .data(data)
-            .enter()
-            .append("text")
-            .text(function (d) { return d.jobTitle; })
-            .attr("x", function (d, i) { return i * 100 + 50; })
-            .attr("y", 100)
-            .style("fill", "#fff")
-            .style("text-anchor", "middle")
-            .style("alignment-baseline", "middle")
-            .style("font-size", "12px");
-
-        // Add click event to the bubbles
-        bubbles.on("click", function (d) {
-            alert("Job: " + d.jobTitle + "\nCompany: " + d.company);
-        });
-    </script>
 </body>
 </html>
