@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Creative CV</title>
+    <title>Your Visual CV</title>
     <style>
         /* Add your CSS styles here */
         body {
@@ -14,15 +14,14 @@
         }
 
         header {
-            background-image: url('background-image.jpg'); /* Replace with your image */
-            background-size: cover;
+            background-color: #333;
             color: #fff;
             text-align: center;
-            padding: 100px 0;
+            padding: 20px 0;
         }
 
         h1 {
-            font-size: 48px;
+            font-size: 36px;
             margin: 0;
         }
 
@@ -61,53 +60,76 @@
             margin: 5px;
         }
 
+        /* Visual representation of the CV */
+        .cv-visualization {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cv-section {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .cv-section:nth-child(odd) {
+            background-color: #f5f5f5;
+        }
+
+        .cv-section h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
         /* Add more CSS styles for visual elements and animations */
     </style>
 </head>
 <body>
     <header>
         <h1>Your Name</h1>
-        <p>Creative CV</p>
+        <p>Visual CV</p>
     </header>
 
     <div class="container">
-        <section class="section">
-            <h2>About Me</h2>
-            <p>
-                Write a brief introduction about yourself here. Highlight your skills, passions, and what makes you unique.
-            </p>
-        </section>
-
-        <section class="section">
-            <h2>Education</h2>
-            <p>
-                <strong>University Name</strong><br>
-                Bachelor of Science in Computer Science<br>
-                Graduation Year: 20XX
-            </p>
-        </section>
-
-        <section class="section">
-            <h2>Work Experience</h2>
-            <p>
-                <strong>Job Title</strong><br>
-                Company Name<br>
-                Dates: Month Year - Month Year<br>
-                Description of your responsibilities and achievements.
-            </p>
-        </section>
-
-        <section class="section">
-            <h2>Skills</h2>
-            <div class="skills">
-                <div class="skill">HTML</div>
-                <div class="skill">CSS</div>
-                <div class="skill">JavaScript</div>
-                <div class="skill">Graphic Design</div>
-                <div class="skill">Teamwork</div>
-                <div class="skill">Problem Solving</div>
+        <div class="cv-visualization">
+            <div class="cv-section">
+                <h2>About Me</h2>
+                <p>
+                    Write a brief introduction about yourself here. Highlight your skills, passions, and what makes you unique.
+                </p>
             </div>
-        </section>
+            <div class="cv-section">
+                <h2>Education</h2>
+                <p>
+                    <strong>University Name</strong><br>
+                    Bachelor of Science in Computer Science<br>
+                    Graduation Year: 20XX
+                </p>
+            </div>
+        </div>
+        <div class="cv-visualization">
+            <div class="cv-section">
+                <h2>Work Experience</h2>
+                <p>
+                    <strong>Job Title</strong><br>
+                    Company Name<br>
+                    Dates: Month Year - Month Year<br>
+                    Description of your responsibilities and achievements.
+                </p>
+            </div>
+            <div class="cv-section">
+                <h2>Skills</h2>
+                <div class="skills">
+                    <div class="skill">HTML</div>
+                    <div class="skill">CSS</div>
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">Graphic Design</div>
+                    <div class="skill">Teamwork</div>
+                    <div class="skill">Problem Solving</div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
