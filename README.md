@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Visual CV</title>
+    <title>Your Bubble CV</title>
     <style>
         /* Add your CSS styles here */
         body {
@@ -61,106 +61,137 @@
         }
 
         /* Visual representation of the CV */
-        .cv-visualization {
+        .bubble-chart-container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .cv-section {
-            flex: 1;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .cv-section:nth-child(odd) {
-            background-color: #f5f5f5;
-        }
-
-        .cv-section h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
+        .bubble {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            cursor: pointer;
         }
 
         /* Add more CSS styles for visual elements and animations */
-
     </style>
 </head>
 <body>
     <header>
         <h1>Your Name</h1>
-        <p>Visual CV</p>
+        <p>Bubble CV</p>
     </header>
 
     <div class="container">
-        <div class="cv-visualization">
-            <div class="cv-section">
-                <h2>About Me</h2>
-                <p>
-                    Write a brief introduction about yourself here. Highlight your skills, passions, and what makes you unique.
-                </p>
+        <section class="section">
+            <h2>About Me</h2>
+            <p>
+                Write a brief introduction about yourself here. Highlight your skills, passions, and what makes you unique.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Education</h2>
+            <p>
+                <strong>University Name</strong><br>
+                Bachelor of Science in Computer Science<br>
+                Graduation Year: 20XX
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Work Experience</h2>
+            <p>
+                <strong>Job Title</strong><br>
+                Company Name<br>
+                Dates: Month Year - Month Year<br>
+                Description of your responsibilities and achievements.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill">HTML</div>
+                <div class="skill">CSS</div>
+                <div class="skill">JavaScript</div>
+                <div class="skill">Graphic Design</div>
+                <div class="skill">Teamwork</div>
+                <div class="skill">Problem Solving</div>
             </div>
-            <div class="cv-section">
-                <h2>Education</h2>
-                <p>
-                    <strong>University Name</strong><br>
-                    Bachelor of Science in Computer Science<br>
-                    Graduation Year: 20XX
-                </p>
-            </div>
-        </div>
-        <div class="cv-visualization">
-            <div class="cv-section">
-                <h2>Work Experience</h2>
-                <p>
-                    <strong>Job Title</strong><br>
-                    Company Name<br>
-                    Dates: Month Year - Month Year<br>
-                    Description of your responsibilities and achievements.
-                </p>
-            </div>
-            <div class="cv-section">
-                <h2>Skills</h2>
-                <div class="skills">
-                    <div class="skill">HTML</div>
-                    <div class="skill">CSS</div>
-                    <div class="skill">JavaScript</div>
-                    <div class="skill">Graphic Design</div>
-                    <div class="skill">Teamwork</div>
-                    <div class="skill">Problem Solving</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- D3.js Bar Chart Visualization -->
-        <div class="cv-section">
-            <h2>Skills Visualization</h2>
-            <div id="visualization-container"></div>
-        </div>
+        </section>
+
+        <!-- D3.js Bubble Chart Visualization -->
+        <section class="section">
+            <h2>Work History Visualization</h2>
+            <div class="bubble-chart-container" id="bubble-chart-container"></div>
+        </section>
     </div>
 
-    <!-- D3.js Code for Bar Chart -->
+    <!-- D3.js Code for Bubble Chart -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
-        // Sample data for the bar chart
-        var data = [10, 20, 30, 40, 50];
+        // Sample data for the bubble chart
+        var data = [
+            { jobTitle: "Job 1", company: "Company A", startDate: "2020-01-01", endDate: "2022-06-30" },
+            { jobTitle: "Job 2", company: "Company B", startDate: "2019-04-15", endDate: "2020-01-15" },
+            { jobTitle: "Job 3", company: "Company C", startDate: "2017-08-10", endDate: "2019-03-20" }
+        ];
 
-        // Set up the SVG canvas
-        var svg = d3.select("#visualization-container")
+        // Create a function to calculate the duration of each job in months
+        function calculateDuration(startDate, endDate) {
+            var start = new Date(startDate);
+            var end = new Date(endDate);
+            var months = (end.getFullYear() - start.getFullYear()) * 12;
+            months -= start.getMonth();
+            months += end.getMonth();
+            return months <= 0 ? 0 : months;
+        }
+
+        // Set up the SVG canvas for the bubble chart
+        var svg = d3.select("#bubble-chart-container")
             .append("svg")
             .attr("width", 400)
             .attr("height", 200);
 
-        // Create bars
-        svg.selectAll("rect")
+        // Create bubbles for each job
+        var bubbles = svg.selectAll("circle")
             .data(data)
             .enter()
-            .append("rect")
-            .attr("x", function(d, i) { return i * 50; })
-            .attr("y", function(d) { return 200 - d; })
-            .attr("width", 40)
-            .attr("height", function(d) { return d; })
-            .attr("fill", "blue");
+            .append("circle")
+            .attr("cx", function (d, i) { return i * 100 + 50; })
+            .attr("cy", 100)
+            .attr("r", function (d) { return Math.sqrt(calculateDuration(d.startDate, d.endDate)) * 10; })
+            .style("fill", "#007bff")
+            .style("opacity", 0.7)
+            .style("cursor", "pointer");
+
+        // Add labels inside the bubbles
+        svg.selectAll(null)
+            .data(data)
+            .enter()
+            .append("text")
+            .text(function (d) { return d.jobTitle; })
+            .attr("x", function (d, i) { return i * 100 + 50; })
+            .attr("y", 100)
+            .style("fill", "#fff")
+            .style("text-anchor", "middle")
+            .style("alignment-baseline", "middle")
+            .style("font-size", "12px");
+
+        // Add click event to the bubbles
+        bubbles.on("click", function (d) {
+            alert("Job: " + d.jobTitle + "\nCompany: " + d.company);
+        });
     </script>
 </body>
 </html>
